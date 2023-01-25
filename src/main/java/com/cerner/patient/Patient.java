@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 
-@Entit
+@Entity
 @Table(name ="patienttb")
 public class Patient {
 
