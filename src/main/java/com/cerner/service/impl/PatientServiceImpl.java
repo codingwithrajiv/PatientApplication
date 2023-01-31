@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cerner.exception.RecordNotFoundException;
 import com.cerner.patient.Addresses;
 import com.cerner.patient.ContactNoDetails;
 import com.cerner.patient.Patient;
@@ -25,9 +26,14 @@ public class PatientServiceImpl implements PatientService {
 	}
 
 	@Override
-	public Optional<Patient> findById(Long id) {
+	public Optional<Patient> findById(Long id) throws RecordNotFoundException {
 		// TODO Auto-generated method stub
-		return patientRepository.findById(id);
+		Patient existingPatient = patientRepository.findById(id).
+				orElseThrow(() -> new RecordNotFoundException("Patient with Id : " + id + " does not exist"));
+		
+		return Optional.of(existingPatient);
+		
+	    //return patientRepository.findById(id);
 	}
 
 	@Override
@@ -67,9 +73,15 @@ public class PatientServiceImpl implements PatientService {
 	}
 
 	@Override
-	public Optional<Patient> findByName(String firstName) {
+	public Optional<Patient> findByName(String firstName) throws RecordNotFoundException {
 		// TODO Auto-generated method stub
-		return patientRepository.findByFirstName(firstName);
+		
+		Patient existingPatient = patientRepository.findByFirstName(firstName).
+				orElseThrow(() -> new RecordNotFoundException("Patient with Id : " + firstName + " does not exist"));
+		
+		return Optional.of(existingPatient);
+		
+		//return patientRepository.findByFirstName(firstName);
 	}
 
 }

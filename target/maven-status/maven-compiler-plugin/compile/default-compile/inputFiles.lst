@@ -1,8 +1,11 @@
 C:\Users\RS106238\WorkSpaces\PatientApp\PatientApplication\src\main\java\com\cerner\patient\Addresses.java
 C:\Users\RS106238\WorkSpaces\PatientApp\PatientApplication\src\main\java\com\cerner\patient\ContactNoDetails.java
+C:\Users\RS106238\WorkSpaces\PatientApp\PatientApplication\src\main\java\com\cerner\exception\CustomExceptionHandler.java
 C:\Users\RS106238\WorkSpaces\PatientApp\PatientApplication\src\main\java\com\cerner\controller\PatientController.java
+C:\Users\RS106238\WorkSpaces\PatientApp\PatientApplication\src\main\java\com\cerner\exception\ErrorResponse.java
 C:\Users\RS106238\WorkSpaces\PatientApp\PatientApplication\src\main\java\com\cerner\service\impl\PatientServiceImpl.java
 C:\Users\RS106238\WorkSpaces\PatientApp\PatientApplication\src\main\java\com\cerner\patient\Patient.java
 C:\Users\RS106238\WorkSpaces\PatientApp\PatientApplication\src\main\java\com\cerner\patient\repo\PatientRepository.java
 C:\Users\RS106238\WorkSpaces\PatientApp\PatientApplication\src\main\java\com\cerner\PatientApplication.java
 C:\Users\RS106238\WorkSpaces\PatientApp\PatientApplication\src\main\java\com\cerner\service\PatientService.java
+C:\Users\RS106238\WorkSpaces\PatientApp\PatientApplication\src\main\java\com\cerner\exception\RecordNotFoundException.java

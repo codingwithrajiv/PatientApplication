@@ -67,9 +67,5 @@ public class ContactNoDetails {
 		Id = id;
 	}
 
-	@Override
-	public String toString() {
-		return "ContactNoDetails [teleType=" + teleType + ", countyCode=" + countyCode + ", teleNo=" + teleNo + "]";
-	}
 
 }

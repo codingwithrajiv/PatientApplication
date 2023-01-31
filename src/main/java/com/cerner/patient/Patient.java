@@ -108,10 +108,5 @@ public class Patient {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	@Override
-	public String toString() {
-		return "Patient [patientId=" + patientId + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender
-				+ ", dateOfBirth=" + dateOfBirth + "]";
-	}
 
 }

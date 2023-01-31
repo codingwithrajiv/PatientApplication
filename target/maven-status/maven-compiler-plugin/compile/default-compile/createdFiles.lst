@@ -1,8 +1,8 @@
 com\cerner\patient\ContactNoDetails.class
 com\cerner\patient\Patient.class
 com\cerner\patient\repo\PatientRepository.class
-com\cerner\controller\PatientController.class
 com\cerner\service\impl\PatientServiceImpl.class
 com\cerner\service\PatientService.class
-com\cerner\patient\Addresses.class
 com\cerner\PatientApplication.class
+com\cerner\controller\PatientController.class
+com\cerner\patient\Addresses.class

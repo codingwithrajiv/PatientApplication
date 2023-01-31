@@ -98,10 +98,5 @@ public class Addresses {
 		Id = id;
 	}
 
-	@Override
-	public String toString() {
-		return "Adresses [houseNO=" + houseNO + ", streetAddress=" + streetAddress + ", city=" + city + ", state="
-				+ state + ", zipCode=" + zipCode + ", country=" + country + "]";
-	}
 
 }

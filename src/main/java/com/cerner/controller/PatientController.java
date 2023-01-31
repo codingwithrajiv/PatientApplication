@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cerner.exception.RecordNotFoundException;
 import com.cerner.patient.Patient;
 import com.cerner.service.PatientService;
 
@@ -28,19 +29,14 @@ public class PatientController {
     public List<Patient> findAllPatient() {
         return patientService.findAllPatient();
     }
-
-    @GetMapping("/home")
-    public String home() {
-        return "This is Home";
-    }
     
     @GetMapping("id/{id}")
-    public Optional<Patient> findPatientById(@PathVariable("id") Long id) {
+    public Optional<Patient> findPatientById(@PathVariable("id") Long id) throws RecordNotFoundException {
         return patientService.findById(id);
     }
 
     @GetMapping("/name/{firstName}")
-    public Optional<Patient> findPatientByName(@PathVariable("firstName") String firstName) {
+    public Optional<Patient> findPatientByName(@PathVariable("firstName") String firstName) throws RecordNotFoundException {
         return patientService.findByName(firstName);
     }
     @PostMapping
