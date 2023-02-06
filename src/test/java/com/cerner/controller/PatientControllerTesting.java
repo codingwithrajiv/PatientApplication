@@ -2,24 +2,17 @@ package com.cerner.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.ResponseEntity;
 
 import com.cerner.exception.RecordNotFoundException;
 import com.cerner.patient.Addresses;
@@ -51,18 +44,18 @@ class PatientControllerTesting {
 		Addresses address = new Addresses();
 
 		address.setId(1L);
-		address.setHouseNO("2B");
+		address.setAddressType("Home");
 		address.setStreetAddress("CITY Street");
 		address.setState("ABC");
 		address.setCity("CITY");
 		address.setState("CITY");
 		address.setZipCode("23847");
 		address.setCountry("India");
-		
+
 		Addresses address2 = new Addresses();
 
 		address2.setId(2L);
-		address2.setHouseNO("2B");
+		address2.setAddressType("Office");
 		address2.setStreetAddress("CITY Street");
 		address2.setState("ABC");
 		address2.setCity("CITY");
@@ -76,19 +69,19 @@ class PatientControllerTesting {
 		patient.setAddresses(addressList);
 
 		List<ContactNoDetails> teleList = new ArrayList<>();
-		
+
 		ContactNoDetails contactNoDetails = new ContactNoDetails();
 		contactNoDetails.setId(1L);
 		contactNoDetails.setCountyCode("91");
 		contactNoDetails.setTeleNo("23895739485");
 		contactNoDetails.setTeleType("Home");
-		
+
 		ContactNoDetails contactNoDetails2 = new ContactNoDetails();
 		contactNoDetails2.setId(2L);
 		contactNoDetails2.setCountyCode("91");
 		contactNoDetails2.setTeleNo("23895739485");
 		contactNoDetails2.setTeleType("Office");
-		
+
 		teleList.add(contactNoDetails);
 		teleList.add(contactNoDetails2);
 
@@ -118,7 +111,6 @@ class PatientControllerTesting {
 		patient3.add(patient2);
 
 		Mockito.when(patientService.findAllPatient()).thenReturn(patient3);
-
 		assertThat(patientController.findAllPatient()).isEqualTo(patient3);
 
 	}
@@ -135,8 +127,8 @@ class PatientControllerTesting {
 		patient.setDateOfBirth(date);
 
 		List<Addresses> addressList = new ArrayList<>();
-		addressList.add(new Addresses(1L, "12", "STREET", "LOCALITY", "JH", "345654", "Ind"));
-		addressList.add(new Addresses(2L, "12", "STREET", "LOCALITY", "JH", "345654", "Ind"));
+		addressList.add(new Addresses(1L, "Office", "STREET", "LOCALITY", "JH", "345654", "Ind"));
+		addressList.add(new Addresses(2L, "Office", "STREET", "LOCALITY", "JH", "345654", "Ind"));
 
 		patient.setAddresses(addressList);
 
@@ -149,16 +141,8 @@ class PatientControllerTesting {
 		Optional<Patient> patientOptional = Optional.of(patient);
 
 		Mockito.when(patientService.findById(1L)).thenReturn(patientOptional);
-
 		assertThat(patientController.findPatientById(1L)).isEqualTo(patientOptional);
-		
-		//If ID is not present- for JUnit coverage 
-		
-		Mockito.when(patientService.findById(100L)).thenReturn(patientOptional);
 
-		assertThat(patientController.findPatientById(100L)).isEqualTo(patientOptional);
-		
-		
 	}
 
 	@Test
@@ -173,8 +157,8 @@ class PatientControllerTesting {
 		patient.setDateOfBirth(date);
 
 		List<Addresses> addressList = new ArrayList<>();
-		addressList.add(new Addresses(1L, "12", "STREET", "LOCALITY", "JH", "345654", "Ind"));
-		addressList.add(new Addresses(2L, "12", "STREET", "LOCALITY", "JH", "345654", "Ind"));
+		addressList.add(new Addresses(1L, "Office", "STREET", "LOCALITY", "JH", "345654", "Ind"));
+		addressList.add(new Addresses(2L, "Office", "STREET", "LOCALITY", "JH", "345654", "Ind"));
 
 		patient.setAddresses(addressList);
 
@@ -184,22 +168,26 @@ class PatientControllerTesting {
 
 		patient.setContactNoDetails(teleList);
 
-		Optional<Patient> patientOptional = Optional.of(patient);
+		//Optional<Patient> patientOptional = Optional.of(patient);
+		
+		List<Patient> patientList = new ArrayList<>();
+		patientList.add(patient);
+		//patient3.add(patient2);
 
-		Mockito.when(patientService.findByName("Rajiv")).thenReturn(patientOptional);
+		Mockito.when(patientService.findByName("Rajiv")).thenReturn(patientList);
 
-		assertThat(patientController.findPatientByName("Rajiv")).isEqualTo(patientOptional);
+		assertThat(patientController.findPatientByName("Rajiv")).isEqualTo(patientList);
 
 	}
 
 	@Test
 	public void testSavePatient() {
-        
+
 		Date date = new Date();
 		Patient patient = new Patient(1L, "Rajiv", "Singh,", "MALE", date);
 		List<Addresses> addressList = new ArrayList<>();
-		addressList.add(new Addresses(1L, "12", "STREET", "LOCALITY", "JH", "345654", "Ind"));
-		addressList.add(new Addresses(2L, "12", "STREET", "LOCALITY", "JH", "345654", "Ind"));
+		addressList.add(new Addresses(1L, "Office", "STREET", "LOCALITY", "JH", "345654", "Ind"));
+		addressList.add(new Addresses(2L, "Office", "STREET", "LOCALITY", "JH", "345654", "Ind"));
 
 		patient.setAddresses(addressList);
 
@@ -212,29 +200,31 @@ class PatientControllerTesting {
 		Mockito.when(patientService.savePatient(patient)).thenReturn(patient);
 
 		assertThat(patientController.savePatient(patient)).isEqualTo(patient);
-		
+
 		Patient actual = patientController.savePatient(patient);
-        assertEquals(patient.getFirstName(), actual.getFirstName());
-        assertEquals(patient.getLastName(), actual.getLastName());
-        assertEquals(patient.getGender(), actual.getGender());
-        assertEquals(patient.getContactNoDetails(), actual.getContactNoDetails());
-        assertEquals(patient.getAddresses(), actual.getAddresses());
-        assertEquals(patient.getDateOfBirth(), actual.getDateOfBirth());
-        assertEquals(patient.getPatientId(), actual.getPatientId());
-        
-        assertEquals(patient.getAddresses().get(0).getId(), actual.getAddresses().get(0).getId());
-        assertEquals(patient.getAddresses().get(0).getCity(), actual.getAddresses().get(0).getCity());
-        assertEquals(patient.getAddresses().get(0).getStreetAddress(), actual.getAddresses().get(0).getStreetAddress());
-        assertEquals(patient.getAddresses().get(0).getHouseNO(), actual.getAddresses().get(0).getHouseNO());
-        assertEquals(patient.getAddresses().get(0).getState(), actual.getAddresses().get(0).getState());
-        assertEquals(patient.getAddresses().get(0).getZipCode(), actual.getAddresses().get(0).getZipCode());
-        assertEquals(patient.getAddresses().get(0).getCountry(), actual.getAddresses().get(0).getCountry());
-        
-        assertEquals(patient.getContactNoDetails().get(0).getId(), actual.getContactNoDetails().get(0).getId());
-        assertEquals(patient.getContactNoDetails().get(0).getCountyCode(), actual.getContactNoDetails().get(0).getCountyCode());
-        assertEquals(patient.getContactNoDetails().get(0).getTeleType(), actual.getContactNoDetails().get(0).getTeleType());
-        assertEquals(patient.getContactNoDetails().get(0).getTeleNo(), actual.getContactNoDetails().get(0).getTeleNo());
-        
+		assertEquals(patient.getFirstName(), actual.getFirstName());
+		assertEquals(patient.getLastName(), actual.getLastName());
+		assertEquals(patient.getGender(), actual.getGender());
+		assertEquals(patient.getContactNoDetails(), actual.getContactNoDetails());
+		assertEquals(patient.getAddresses(), actual.getAddresses());
+		assertEquals(patient.getDateOfBirth(), actual.getDateOfBirth());
+		assertEquals(patient.getPatientId(), actual.getPatientId());
+
+		assertEquals(patient.getAddresses().get(0).getId(), actual.getAddresses().get(0).getId());
+		assertEquals(patient.getAddresses().get(0).getCity(), actual.getAddresses().get(0).getCity());
+		assertEquals(patient.getAddresses().get(0).getStreetAddress(), actual.getAddresses().get(0).getStreetAddress());
+		assertEquals(patient.getAddresses().get(0).getAddressType(), actual.getAddresses().get(0).getAddressType());
+		assertEquals(patient.getAddresses().get(0).getState(), actual.getAddresses().get(0).getState());
+		assertEquals(patient.getAddresses().get(0).getZipCode(), actual.getAddresses().get(0).getZipCode());
+		assertEquals(patient.getAddresses().get(0).getCountry(), actual.getAddresses().get(0).getCountry());
+
+		assertEquals(patient.getContactNoDetails().get(0).getId(), actual.getContactNoDetails().get(0).getId());
+		assertEquals(patient.getContactNoDetails().get(0).getCountyCode(),
+				actual.getContactNoDetails().get(0).getCountyCode());
+		assertEquals(patient.getContactNoDetails().get(0).getTeleType(),
+				actual.getContactNoDetails().get(0).getTeleType());
+		assertEquals(patient.getContactNoDetails().get(0).getTeleNo(), actual.getContactNoDetails().get(0).getTeleNo());
+
 	}
 
 	@Test
@@ -249,8 +239,8 @@ class PatientControllerTesting {
 		patient.setDateOfBirth(date);
 
 		List<Addresses> addressList = new ArrayList<>();
-		addressList.add(new Addresses(1L, "12", "STREET", "LOCALITY", "JH", "345654", "Ind"));
-		addressList.add(new Addresses(2L, "12", "STREET", "LOCALITY", "JH", "345654", "Ind"));
+		addressList.add(new Addresses(1L, "Office", "STREET", "LOCALITY", "JH", "345654", "Ind"));
+		addressList.add(new Addresses(2L, "office", "STREET", "LOCALITY", "JH", "345654", "Ind"));
 
 		patient.setAddresses(addressList);
 
@@ -284,8 +274,8 @@ class PatientControllerTesting {
 		patient.setDateOfBirth(date);
 
 		List<Addresses> addressList = new ArrayList<>();
-		addressList.add(new Addresses(1L, "12", "STREET", "LOCALITY", "JH", "345654", "Ind"));
-		addressList.add(new Addresses(2L, "12", "STREET", "LOCALITY", "JH", "345654", "Ind"));
+		addressList.add(new Addresses(1L, "Office", "STREET", "LOCALITY", "JH", "345654", "Ind"));
+		addressList.add(new Addresses(2L, "Home", "STREET", "LOCALITY", "JH", "345654", "Ind"));
 
 		patient.setAddresses(addressList);
 

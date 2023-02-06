@@ -17,41 +17,95 @@ import com.cerner.exception.RecordNotFoundException;
 import com.cerner.patient.Patient;
 import com.cerner.service.PatientService;
 
+/**
+ * 
+ * The {@code PatientController} class implements the REST API for managing
+ * patients.
+ * 
+ * @author Cerner Corporation
+ * 
+ * @version 1.0
+ * 
+ * @since 2020-06-01
+ */
 @RestController
 @RequestMapping("/patient")
 public class PatientController {
- 
+
 	@Autowired
-	private  PatientService patientService;
+	private PatientService patientService;
 
+	/**
+	 * 
+	 * This method retrieves a list of all patients.
+	 * 
+	 * @return a list of all patients
+	 */
+	@GetMapping
+	public List<Patient> findAllPatient() {
+		return patientService.findAllPatient();
+	}
 
-    @GetMapping
-    public List<Patient> findAllPatient() {
-        return patientService.findAllPatient();
-    }
-    
-    @GetMapping("id/{id}")
-    public Optional<Patient> findPatientById(@PathVariable("id") Long id) throws RecordNotFoundException {
-        return patientService.findById(id);
-    }
+	/**
+	 * 
+	 * This method retrieves a patient by its ID.
+	 * 
+	 * @param id the ID of the patient to retrieve
+	 * @return an optional patient if found, otherwise an empty optional
+	 * @throws RecordNotFoundException if the patient does not exist
+	 */
+	@GetMapping("id/{id}")
+	public Optional<Patient> findPatientById(@PathVariable("id") Long id) throws RecordNotFoundException {
+		return patientService.findById(id);
+	}
 
-    @GetMapping("/name/{firstName}")
-    public Optional<Patient> findPatientByName(@PathVariable("firstName") String firstName) throws RecordNotFoundException {
-        return patientService.findByName(firstName);
-    }
-    @PostMapping
-    public Patient savePatient(@RequestBody Patient patient) {
-        return patientService.savePatient(patient);
-    }
+	/**
+	 * 
+	 * This method retrieves a patient by its name.
+	 * 
+	 * @param firstName the first name of the patient to retrieve
+	 * @return an optional patient if found, otherwise an empty optional
+	 * @throws RecordNotFoundException if the patient does not exist
+	 */
+	@GetMapping("/name/{firstName}")
+	public  List<Patient> findPatientByName(@PathVariable("firstName") String firstName)
+			throws RecordNotFoundException {
+		return patientService.findByName(firstName);
+	}
 
-    @PutMapping
-    public Patient updatePatient(@RequestBody Patient patient) {
-        return patientService.updatePatient(patient);
-    }
+	/**
+	 * 
+	 * This method saves a new patient.
+	 * 
+	 * @param patient the patient to save
+	 * @return the saved patient
+	 */
+	@PostMapping
+	public Patient savePatient(@RequestBody Patient patient) {
+		return patientService.savePatient(patient);
+	}
 
-    @DeleteMapping("/{id}")
-    public void deletePatient(@PathVariable("id") Long id) {
-    	patientService.deletePatient(id);
-    }
-	
+	/**
+	 * 
+	 * This method updates an existing patient.
+	 * 
+	 * @param patient the patient to update
+	 * @return the updated patient
+	 * @throws RecordNotFoundException 
+	 */
+	@PutMapping
+	public Patient updatePatient(@RequestBody Patient patient) throws RecordNotFoundException {
+		return patientService.updatePatient(patient);
+	}
+
+	/**
+	 * 
+	 * This method deletes a patient by its ID.
+	 * 
+	 * @param id the ID of the patient to delete
+	 */
+	@DeleteMapping("/{id}")
+	public void deletePatient(@PathVariable("id") Long id) {
+		patientService.deletePatient(id);
+	}
 }

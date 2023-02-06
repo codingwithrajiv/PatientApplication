@@ -13,8 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
+/**
+ * 
+ * Patient Entity class representing a patient in a medical system
+ * 
+ * @author Cerner Corporation
+ */
 @Entity
 @Table(name = "patienttb")
 public class Patient {
@@ -22,33 +26,6 @@ public class Patient {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long patientId;
-
-	@OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_id", referencedColumnName ="patientId")
-    private List<Addresses> addresses = new ArrayList<>();
-
-	@OneToMany(cascade= CascadeType.ALL)
-	@JoinColumn(name = "fk_id", referencedColumnName ="patientId")
-    private List<ContactNoDetails> contactNoDetails = new ArrayList<>();
-
-	
-	
-	public List<Addresses> getAddresses() {
-		return addresses;
-	}
-
-	public void setAddresses(List<Addresses> addresses) {
-		this.addresses = addresses;
-	}
-
-	public List<ContactNoDetails> getContactNoDetails() {
-		return contactNoDetails;
-	}
-
-	public void setContactNoDetails(List<ContactNoDetails> contactNoDetails) {
-		this.contactNoDetails = contactNoDetails;
-	}
-
 	private String firstName;
 	private String lastName;
 	private String gender;
@@ -67,6 +44,35 @@ public class Patient {
 		this.dateOfBirth = dateOfBirth;
 	}
 
+	/**
+	 * List of addresses of the patient
+	 */
+	@OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_id", referencedColumnName = "patientId")
+	private List<Addresses> addresses = new ArrayList<>();
+
+	/**
+	 * List of contact numbers of the patient
+	 */
+	@OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_id", referencedColumnName = "patientId")
+	private List<ContactNoDetails> contactNoDetails = new ArrayList<>();
+
+	public List<Addresses> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(List<Addresses> addresses) {
+		this.addresses = addresses;
+	}
+
+	public List<ContactNoDetails> getContactNoDetails() {
+		return contactNoDetails;
+	}
+
+	public void setContactNoDetails(List<ContactNoDetails> contactNoDetails) {
+		this.contactNoDetails = contactNoDetails;
+	}
 
 	public Long getPatientId() {
 		return patientId;
@@ -107,6 +113,5 @@ public class Patient {
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-
 
 }

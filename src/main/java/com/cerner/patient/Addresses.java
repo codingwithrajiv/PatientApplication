@@ -1,17 +1,20 @@
 package com.cerner.patient;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
+/**
+ * 
+ * The Addresses class represents a physical address of a patient. It includes
+ * details such as the house number, street address, city, state, zip code, and
+ * country. It is a part of the one to many relationship with the Patient
+ * entity.
+ * 
+ * @author Cerner Corporation
+ */
 @Entity
 @Table(name = "addresstb")
 public class Addresses {
@@ -19,7 +22,7 @@ public class Addresses {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
-	private String houseNO;
+	private String addressType;
 	private String streetAddress;
 	private String city;
 	private String state;
@@ -30,11 +33,11 @@ public class Addresses {
 		super();
 	}
 
-	public Addresses(Long id, String houseNO, String streetAddress, String city, String state, String zipCode,
+	public Addresses(Long id, String addressType, String streetAddress, String city, String state, String zipCode,
 			String country) {
 		super();
 		Id = id;
-		this.houseNO = houseNO;
+		this.addressType = addressType;
 		this.streetAddress = streetAddress;
 		this.city = city;
 		this.state = state;
@@ -42,12 +45,12 @@ public class Addresses {
 		this.country = country;
 	}
 
-	public String getHouseNO() {
-		return houseNO;
+	public String getAddressType() {
+		return addressType;
 	}
 
-	public void setHouseNO(String houseNO) {
-		this.houseNO = houseNO;
+	public void setAddressType(String addressType) {
+		this.addressType = addressType;
 	}
 
 	public String getStreetAddress() {
@@ -97,6 +100,5 @@ public class Addresses {
 	public void setId(Long id) {
 		Id = id;
 	}
-
 
 }

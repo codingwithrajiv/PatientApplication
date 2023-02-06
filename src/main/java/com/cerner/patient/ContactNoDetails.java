@@ -1,16 +1,22 @@
 package com.cerner.patient;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+/**
+ * 
+ * The class ContactNoDetails represents the telephone number details of a
+ * patient. It contains the following fields - Id - Id of the record. It is
+ * generated automatically. teleType - type of telephone number, for example,
+ * home, work etc. countyCode - country code of the telephone number. teleNo -
+ * telephone number.
+ * 
+ * @author cerner
+ * @version 1.0
+ */
 
 @Entity
 @Table(name = "contactnotb")
@@ -66,6 +72,5 @@ public class ContactNoDetails {
 	public void setId(Long id) {
 		Id = id;
 	}
-
 
 }
