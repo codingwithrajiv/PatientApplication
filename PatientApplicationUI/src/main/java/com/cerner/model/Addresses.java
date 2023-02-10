@@ -2,7 +2,7 @@ package com.cerner.model;
 
 public class Addresses {
 
-	//private Long Id;
+	private Long id;
 	private String addressType;
 	private String streetAddress;
 	private String city;
@@ -10,10 +10,10 @@ public class Addresses {
 	private String zipCode;
 	private String country;
 	
-	public Addresses( String addressType, String streetAddress, String city, String state, String zipCode,
+	public Addresses( Long id,String addressType, String streetAddress, String city, String state, String zipCode,
 			String country) {
 		super();
-		//Id = id;
+		this.id = id;
 		this.addressType = addressType;
 		this.streetAddress = streetAddress;
 		this.city = city;
@@ -29,11 +29,19 @@ public class Addresses {
 
 
 
-	/*
-	 * public Long getId() { return Id; }
-	 * 
-	 * public void setId(Long id) { Id = id; }
-	 */
+	
+
+	 
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
 	public String getAddressType() {
 		return addressType;
 	}

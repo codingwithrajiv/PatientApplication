@@ -14,8 +14,8 @@ public class FieldValidation {
 	 
 	 public FieldValidation() {
 		 
-		    onlyAlphabet = Pattern.compile("^[a-zA-Z]+$");
-	        onlyNumeric = Pattern.compile("^[0-9]+$");
+		    onlyAlphabet = Pattern.compile("[a-zA-Z][a-zA-Z ]+[a-zA-Z]$");
+	        onlyNumeric = Pattern.compile("[0-9]+");  //"[0-9]+";
 	        tenDigitOnly = Pattern.compile("^\\d{10}$");
 	    }
 	

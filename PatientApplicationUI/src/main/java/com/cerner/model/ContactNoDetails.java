@@ -2,32 +2,30 @@ package com.cerner.model;
 
 public class ContactNoDetails {
 
-	
-	//private Long id;
+	private Long id;
 	private String teleType;
 	private String countyCode;
 	private String teleNo;
-	
-	public ContactNoDetails(String teleType, String countyCode, String teleNo) {
+
+	public ContactNoDetails(Long id, String teleType, String countyCode, String teleNo) {
 		super();
-		//this.id = id;
+		this.id = id;
 		this.teleType = teleType;
 		this.countyCode = countyCode;
 		this.teleNo = teleNo;
 	}
 
-	
 	public ContactNoDetails() {
 		super();
 	}
 
+	public Long getId() {
+		return id;
+	}
 
-
-	/*
-	 * public Long getId() { return id; }
-	 * 
-	 * public void setId(Long id) { this.id = id; }
-	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getTeleType() {
 		return teleType;
@@ -55,10 +53,7 @@ public class ContactNoDetails {
 
 	@Override
 	public String toString() {
-		return "ContactNoDetails [ teleType=" + teleType + ", countyCode=" + countyCode + ", teleNo="
-				+ teleNo + "]";
+		return "ContactNoDetails [ teleType=" + teleType + ", countyCode=" + countyCode + ", teleNo=" + teleNo + "]";
 	}
-	
-	
-	
+
 }
