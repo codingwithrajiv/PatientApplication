@@ -111,11 +111,11 @@ public class PatientCreation {
 		composite.setBackground(SWTResourceManager.getColor(187, 221, 255));
 		composite.setBounds(32, 10, 624, 39);
 
-		Label lblNewLabel = new Label(composite, SWT.NONE);
-		lblNewLabel.setFont(SWTResourceManager.getFont("Microsoft Himalaya", 21, SWT.NONE));
-		lblNewLabel.setBackground(SWTResourceManager.getColor(224, 255, 255));
-		lblNewLabel.setBounds(10, 10, 193, 22);
-		lblNewLabel.setText("Patient Entry Page");
+		Label pagetTitle = new Label(composite, SWT.NONE);
+		pagetTitle.setFont(SWTResourceManager.getFont("Microsoft Himalaya", 21, SWT.NONE));
+		pagetTitle.setBackground(SWTResourceManager.getColor(224, 255, 255));
+		pagetTitle.setBounds(10, 10, 193, 22);
+		pagetTitle.setText("Patient Entry Page");
 	
 		Button patientLocatorButton = new Button(composite, SWT.NONE);
 		patientLocatorButton.addSelectionListener(new SelectionAdapter() {
@@ -468,7 +468,7 @@ public class PatientCreation {
 							addressType2, street2, city2, state2, zipCode2, country2);
 
 					try {
-						// PatientView patientView = new PatientView(display);
+						
 						HttpResponse<String> response = HttpRestClient.updatePatient(patient);
 						System.out.println("Response of update" + response);
 						if (response.statusCode() == 200) {
@@ -525,8 +525,8 @@ public class PatientCreation {
 					gender = "Others";
 				}
 
-				System.out.println("Gender in Save  " + gender);
-				System.out.println("Date Of Birth in Save " + dateOfBirth);
+				System.out.println("Gender in Modify  " + gender);
+				System.out.println("Date Of Birth in Modify " + dateOfBirth);
 
 				String typeOfTele1 = typeOfTelephone_1.getText();
 				String contryCode1 = countryCode1.getText();
@@ -706,7 +706,7 @@ public class PatientCreation {
 			tele3.setText(patient.getContactNoDetails().get(2).getTeleNo().toString());
 		}
 
-		System.out.println("SIZEEE of ADDRESS" + patient.getAddresses().size());
+		System.out.println("Size of Address" + patient.getAddresses().size());
 
 		if (patient.getAddresses().size() > 0) {
 			System.out.println("Size>1");

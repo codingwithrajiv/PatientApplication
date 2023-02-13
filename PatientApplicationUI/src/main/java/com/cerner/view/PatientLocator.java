@@ -71,11 +71,11 @@ public class PatientLocator {
 		composite.setBackground(SWTResourceManager.getColor(187, 221, 255));
 		composite.setBounds(27, 21, 624, 39);
 
-		Label lblNewLabel = new Label(composite, SWT.NONE);
-		lblNewLabel.setFont(SWTResourceManager.getFont("Microsoft Himalaya", 21, SWT.NONE));
-		lblNewLabel.setBackground(SWTResourceManager.getColor(224, 255, 255));
-		lblNewLabel.setBounds(10, 10, 202, 22);
-		lblNewLabel.setText("Patient Locator Page");
+		Label pageTitle = new Label(composite, SWT.NONE);
+		pageTitle.setFont(SWTResourceManager.getFont("Microsoft Himalaya", 21, SWT.NONE));
+		pageTitle.setBackground(SWTResourceManager.getColor(224, 255, 255));
+		pageTitle.setBounds(10, 10, 202, 22);
+		pageTitle.setText("Patient Locator Page");
 
 		Label SearchPatientByLabel = new Label(shlPatientLocator, SWT.NONE);
 		SearchPatientByLabel.setBounds(29, 92, 100, 15);
@@ -109,9 +109,7 @@ public class PatientLocator {
 				Patient patient = null;
 				TableItem[] item = table.getSelection();
 				for (TableItem itemTable : item) {
-					System.out.println("before itemTable.getText(0) ");
-					System.out.println(itemTable.getText(0));
-					System.out.println(itemTable.getText(1));
+				       System.out.println(itemTable.getText(0));
 
 					try {
 						System.out.println("Patient ID  " + Long.valueOf(itemTable.getText(0)));
@@ -608,9 +606,9 @@ public class PatientLocator {
 			table.addListener(SWT.Selection, new Listener() {
 				@Override
 				public void handleEvent(Event event) {
-					System.out.println("Selected a Row");
 					TableItem selectedItem = (TableItem) event.item;
 					if (selectedItem != null) {
+						System.out.println("Selected a Row");
 						btnDelete.setEnabled(true);
 						btnModify.setEnabled(true);
 						btnView.setEnabled(true);
